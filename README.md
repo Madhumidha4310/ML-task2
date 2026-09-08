@@ -110,8 +110,9 @@ Duplicate transaction records were removed.
 ### 💰 Total Amount Calculation
 
 A new TotalAmount column was created:
-
+```text
 df["TotalAmount"] = df["Quantity"] * df["Price"]
+```
 
 This represents the total value of each transaction.
 
@@ -122,8 +123,9 @@ RFM analysis was performed at the customer level.
 Recency
 
 Measures how recently a customer made a purchase.
-
+```text
 Recency = Reference Date - Last Purchase Date
+```
 
 A lower Recency value indicates that the customer purchased more recently.
 
@@ -141,22 +143,25 @@ Monetary = Sum of TotalAmount
 
 The three metrics are calculated using customer-level aggregation:
 
+```text
 rfm = df.groupby("Customer ID").agg(
     Recency=("InvoiceDate",
              lambda x: (reference_date - x.max()).days),
     Frequency=("Invoice", "nunique"),
     Monetary=("TotalAmount", "sum")
 )
-
+```
 ### ⚖️ Feature Scaling
 
 The RFM features are standardized using StandardScaler:
 
+```text
 features = ["Recency", "Frequency", "Monetary"]
 
 scaler = StandardScaler()
 
 rfm_scaled = scaler.fit_transform(rfm[features])
+```
 
 Scaling ensures that features with different numerical ranges can be used effectively by the clustering algorithm.
 
@@ -166,6 +171,7 @@ K-Means clustering is used to divide customers into groups based on their RFM ch
 
 The project initially evaluates different values of K using the Elbow Method.
 
+```text
 for k in range(2, 11):
     model = KMeans(
         n_clusters=k,
@@ -175,6 +181,7 @@ for k in range(2, 11):
 
     model.fit(rfm_scaled)
     inertia.append(model.inertia_)
+```
 
 The final clustering model in the notebook uses:
 
@@ -197,18 +204,22 @@ Silhouette Score
 
 The Silhouette Score measures how well customers are separated between clusters.
 
+```text
 silhouette = silhouette_score(
     rfm_scaled,
     rfm["Cluster"]
 )
+```
 Davies-Bouldin Index
 
 The Davies-Bouldin Index evaluates the similarity between clusters.
 
+```text
 db_index = davies_bouldin_score(
     rfm_scaled,
     rfm["Cluster"]
 )
+```
 
 ### 📈 Customer Cluster Visualization
 
@@ -217,21 +228,24 @@ Customer segments are visualized using:
 Frequency on the X-axis
 Monetary on the Y-axis
 Cluster represented using different plot groups
+```text
 plt.scatter(
     rfm["Frequency"],
     rfm["Monetary"],
     c=rfm["Cluster"]
 )
-
+```
 This helps visually understand differences in customer purchasing behavior.
 
 ### 📋 Cluster Summary
 
 The average RFM values for each customer segment are calculated:
 
+```text
 cluster_summary = rfm.groupby("Cluster")[
     ["Recency", "Frequency", "Monetary"]
 ].mean()
+```
 
 This summary can be used to understand the characteristics of each customer group.
 
