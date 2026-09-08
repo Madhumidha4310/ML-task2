@@ -115,9 +115,7 @@ df["TotalAmount"] = df["Quantity"] * df["Price"]
 
 This represents the total value of each transaction.
 
----
-
-## 📊 RFM Analysis
+### 📊 RFM Analysis
 
 RFM analysis was performed at the customer level.
 
@@ -280,3 +278,5 @@ Madhumidha E
 
 Skills demonstrated:
 Python • Pandas • NumPy • Data Cleaning • RFM Analysis • K-Means Clustering • Scikit-learn • Data Visualization • Machine Learning
+
+---
