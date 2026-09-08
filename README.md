@@ -1,5 +1,6 @@
-Customer Segmentation using RFM Analysis and K-Means Clustering
-📌 Project Overview
+# Customer Segmentation using RFM Analysis and K-Means Clustering
+
+## 📌 Project Overview
 
 This project performs customer segmentation using RFM (Recency, Frequency, Monetary) analysis and K-Means clustering.
 
@@ -7,37 +8,48 @@ The sales transaction data is cleaned and prepared before calculating customer-l
 
 The project also evaluates the clustering results using Silhouette Score and Davies-Bouldin Index and visualizes the resulting customer clusters.
 
-🎯 Objectives
-Clean and preprocess sales transaction data.
-Remove invalid and cancelled transactions.
-Calculate the total transaction amount.
-Perform customer-level RFM analysis.
-Standardize RFM features.
-Segment customers using K-Means clustering.
-Determine a suitable number of clusters using the Elbow Method.
-Evaluate clustering performance.
-Visualize customer segments and summarize cluster characteristics.
-🛠️ Technologies Used
-Python
-Pandas
-NumPy
-Matplotlib
-Seaborn
-Scikit-learn
-Jupyter Notebook / Google Colab
-📂 Dataset
+---
+
+## 🎯 Objectives
+
+- Clean and preprocess sales transaction data.
+- Remove invalid and cancelled transactions.
+- Calculate the total transaction amount.
+- Perform customer-level RFM analysis.
+- Standardize RFM features.
+- Segment customers using K-Means clustering.
+- Determine a suitable number of clusters using the Elbow Method.
+- Evaluate clustering performance.
+- Visualize customer segments and summarize cluster characteristics.
+
+---
+
+## 🛠️ Technologies Used
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- Google Colab
+
+---
+
+## 📂 Dataset
 
 The project uses a sales transaction dataset containing information such as:
 
-Customer ID
-Invoice
-Invoice Date
-Quantity
-Price
+- Customer ID
+- Invoice
+- Invoice Date
+- Quantity
+- Price
 
 The dataset is loaded from a CSV file.
 
-🔄 Project Workflow
+## 🔄 Project Workflow
+
+```text
 Sales Transaction Dataset
           ↓
 Data Loading
@@ -67,7 +79,10 @@ Cluster Evaluation
 Customer Cluster Visualization
           ↓
 Cluster Summary
-🧹 Data Cleaning
+```
+---
+
+## 🧹 Data Cleaning
 
 The following preprocessing steps were performed:
 
@@ -92,7 +107,7 @@ were removed.
 
 Duplicate transaction records were removed.
 
-💰 Total Amount Calculation
+### 💰 Total Amount Calculation
 
 A new TotalAmount column was created:
 
@@ -100,7 +115,9 @@ df["TotalAmount"] = df["Quantity"] * df["Price"]
 
 This represents the total value of each transaction.
 
-📊 RFM Analysis
+---
+
+## 📊 RFM Analysis
 
 RFM analysis was performed at the customer level.
 
@@ -132,7 +149,8 @@ rfm = df.groupby("Customer ID").agg(
     Frequency=("Invoice", "nunique"),
     Monetary=("TotalAmount", "sum")
 )
-⚖️ Feature Scaling
+
+### ⚖️ Feature Scaling
 
 The RFM features are standardized using StandardScaler:
 
@@ -144,7 +162,7 @@ rfm_scaled = scaler.fit_transform(rfm[features])
 
 Scaling ensures that features with different numerical ranges can be used effectively by the clustering algorithm.
 
-🤖 K-Means Clustering
+### 🤖 K-Means Clustering
 
 K-Means clustering is used to divide customers into groups based on their RFM characteristics.
 
@@ -163,7 +181,8 @@ for k in range(2, 11):
 The final clustering model in the notebook uses:
 
 n_clusters = 2
-📉 Elbow Method
+
+### 📉 Elbow Method
 
 The Elbow Method is used to analyze the relationship between:
 
@@ -172,7 +191,7 @@ Inertia
 
 The resulting graph helps identify a suitable number of clusters for customer segmentation.
 
-📏 Model Evaluation
+### 📏 Model Evaluation
 
 Two clustering evaluation metrics are used.
 
@@ -192,7 +211,8 @@ db_index = davies_bouldin_score(
     rfm_scaled,
     rfm["Cluster"]
 )
-📈 Customer Cluster Visualization
+
+### 📈 Customer Cluster Visualization
 
 Customer segments are visualized using:
 
@@ -207,7 +227,7 @@ plt.scatter(
 
 This helps visually understand differences in customer purchasing behavior.
 
-📋 Cluster Summary
+### 📋 Cluster Summary
 
 The average RFM values for each customer segment are calculated:
 
@@ -217,31 +237,44 @@ cluster_summary = rfm.groupby("Cluster")[
 
 This summary can be used to understand the characteristics of each customer group.
 
-💡 Business Applications
+---
+
+## 💡 Business Applications
 
 Customer segmentation can help businesses:
 
-Identify recently active customers.
-Identify frequent customers.
-Identify high-value customers.
-Develop targeted marketing campaigns.
-Improve customer retention strategies.
-Identify different customer purchasing patterns.
-Personalize offers and promotions.
-📁 Project Structure
+- Identify recently active customers.
+- Identify frequent customers.
+- Identify high-value customers.
+- Develop targeted marketing campaigns.
+- Improve customer retention strategies.
+- Identify different customer purchasing patterns.
+- Personalize offers and promotions.
+
+---
+
+## 📁 Project Structure
+
+```text
 Customer-Segmentation/
 │
 ├── Customer_Segmentation.ipynb
 ├── sales2.xlsx - Sheet1.csv
 └── README.md
-🚀 Future Enhancements
-Experiment with different numbers of clusters.
-Create meaningful customer segment names such as High-Value, Loyal, and At-Risk based on cluster characteristics.
-Add additional customer behavior features.
-Build an interactive Power BI dashboard.
-Compare K-Means with other clustering algorithms.
-Automate customer segmentation for new transaction data.
-👩‍💻 Author
+```
+---
+## 🚀 Future Enhancements
+
+- Experiment with different numbers of clusters.
+- Create meaningful customer segment names such as High-Value, Loyal, and At-Risk based on cluster characteristics.
+- Add additional customer behavior features.
+- Build an interactive Power BI dashboard.
+- Compare K-Means with other clustering algorithms.
+- Automate customer segmentation for new transaction data.
+
+---
+
+## 👩‍💻 Author
 
 Madhumidha E
 
