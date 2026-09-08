@@ -278,5 +278,3 @@ Madhumidha E
 
 Skills demonstrated:
 Python • Pandas • NumPy • Data Cleaning • RFM Analysis • K-Means Clustering • Scikit-learn • Data Visualization • Machine Learning
-
----
